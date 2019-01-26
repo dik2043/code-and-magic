@@ -33,6 +33,11 @@ var getMaxElem = function (arr) {
     return maxElem;
 };
 
+/* Создать рандомное число от и до */
+
+function getRandonNumber(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 /* Отрисовать статистику при попадании в забор */
 
@@ -53,12 +58,21 @@ var renderStatistics = function (ctx, players, times) {
 
     var players = ['Вы', 'Иван', 'Юлия', 'Кекс'];
 
-    var maxTime = getMaxElem(times);  /* times приходит из game.js */
-    // var TIME_Y = BAR_MAX_HEIGHT - (BAR_MAX_HEIGHT * times[i]) / maxTime) - GAP;
+    var maxTime = getMaxElem(times);  /* массив times приходит из game.js */
 
     for (var i = 0; i < players.length; i++) {
+        /* пишем результат времени из массива times*/
         ctx.fillText(Math.round(times[i]), CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, TIME_Y + (BAR_MAX_HEIGHT - (BAR_MAX_HEIGHT * times[i]) / maxTime));
+        /* пишем имя игрока из массива players*/
         ctx.fillText(players[i], CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, BAR_Y + GAP);
+        var randomColor = 'rgba(0, 100, ' +  getRandonNumber(50, 255) + ')';
+        /* 'Вы' - всегда красный, остальные случайно */
+        if (players[i] == 'Вы') {
+            ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+        } else {
+            ctx.fillStyle = randomColor;
+        }        
+        /* Отрисовываем столбец по времени */
         ctx.fillRect(CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, BAR_Y, BAR_WIDTH, - (BAR_MAX_HEIGHT * times[i]) / maxTime);
     }
 };
