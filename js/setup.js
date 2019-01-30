@@ -1,5 +1,9 @@
 var setup = document.querySelector('.setup');
-var template = document.querySelector('#similar-wizard-template');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+    .content
+    .querySelector('.setup-similar-item');   /* долбанутая штука */
+
+var similarWizardsList = document.querySelector('.setup-similar-list');
 
 var wizards = [];   /* Пустой массив для заполнения счетчиком */
 
@@ -52,22 +56,48 @@ var getRandomNumber = function (min, max) {
 
 var createObj = function () {
     var obj = {
-        'name': names[getRandomNumber(0, names.length)] + ' ' + lastNames[getRandomNumber(0, lastNames.length - 1)],
+        'name': names[getRandomNumber(0, names.length - 1)] + ' ' + lastNames[getRandomNumber(0, lastNames.length - 1)],
         'coatColor': coatColors[getRandomNumber(0, coatColors.length - 1)],
         'eyesColors': eyesColors[getRandomNumber(0, eyesColors.length - 1)]
-    }
+    };
     return obj;
 };
 
+
 // Начинаем действия
 
+/* Показываем скрытые элементы */
+
 setup.classList.remove('hidden');
+document.querySelector('.setup-similar').classList.remove('hidden');
 
 /* Создаем массив из четырех случайных объектов (волшебников) */
 
 for (var i = 0; i < 4; i++) {
     wizards[i] = createObj();
-} 
-console.log(wizards);
+}
 
+/* Создаем волшебника из верстки */
 
+var renderWizard = function (wizard) {
+    var wizardElement = similarWizardTemplate.cloneNode(true);
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColors;
+    
+    return wizardElement;
+};
+
+/* Создаем пустое "ведро" (document fragment) и прикрепляем к нему четырех генерируемых волшебников */
+
+var documentFragment = document.createDocumentFragment();
+for (i = 0; i < wizards.length; i++) {
+    documentFragment.appendChild(renderWizard(wizards[i]));
+}
+
+/* Создаем DOM-элементы по шаблону */
+var createDOMWizard = function (fragment) {
+    similarWizardsList.appendChild(fragment);
+};
+
+createDOMWizard(documentFragment);
