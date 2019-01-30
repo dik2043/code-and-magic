@@ -10,7 +10,7 @@ var BAR_MAX_HEIGHT = 150;
 var BAR_GAP = 50;
 var BAR_HEIGHT = 20;
 var BAR_WIDTH = 40;
-var TIME_Y = 80;
+var TIME_Y = 80;   /* начальные координаты времени */
 var barWidth = CLOUD_WIDTH - GAP - TEXT_WIDTH - GAP;
 
 /* Отрисовать облако по параметрам */
@@ -41,22 +41,22 @@ function getRandonNumber(min, max) {
 
 /* Отрисовать статистику при попадании в забор */
 
-var renderStatistics = function (ctx, players, times) {
+var renderStatistics = function (ctx, players, times) {   /* массив players приходит из game.js*/
     renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgb(0, 0, 0, 0.7');
     renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
     
     ctx.font = '16px PT Mono';
     ctx.fillStyle = '#000';   /* черный */
     ctx.textBaseline = 'hanging';   /* отсчет координат от верха текста */
-    ctx.fillText('Ура, вы победили!', CLOUD_X + FONT_GAP * 1, CLOUD_Y + FONT_GAP * 2);
+    ctx.fillText('Ура, вы победили!', CLOUD_X + FONT_GAP * 1, CLOUD_Y + FONT_GAP * 1);
     ctx.fillText('Список результатов:', CLOUD_X + FONT_GAP * 1, CLOUD_Y + FONT_GAP * 3);
 
     ctx.fillStyle = '#000';   /* черный */
 
-    var playerIndex = 0;
-    var playerName = 'Вы';
+    // var playerIndex = 0;
+    // var playerName = 'Вы';
 
-    var players = ['Вы', 'Иван', 'Юлия', 'Кекс'];
+    // var players = ['Вы', 'Иван', 'Юлия', 'Кекс'];
 
     var maxTime = getMaxElem(times);  /* массив times приходит из game.js */
 
