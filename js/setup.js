@@ -77,6 +77,7 @@ for (var i = 0; i < 4; i++) {
     wizards[i] = createObj();
 }
 
+
 /* Создаем волшебника из верстки */
 
 var renderWizard = function (wizard) {
