@@ -135,9 +135,12 @@ var onPopupEscPress = function (evt) {
 };
 
 var onPopupEnterPress = function (evt) {
-    if (evt.keyCode === 13) {
-        form.submit();
-    } 
+    if (evt.keyCode === 13 && !(setup.classList.contains('hidden')) && !(evt.target === setupClose)) {
+        console.log(evt.target);
+        // form.submit();
+    } else if (evt.keyCode === 13) {
+        console.log('dsa');
+    }
 };
 
 var openPopup = function () {
@@ -149,6 +152,7 @@ var openPopup = function () {
 var closePopup = function () {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress, true);
+    setupOpen.removeEventListener('click', closePopup);
 };
 
 /* Навешиваем обработчики на элементы */
@@ -196,13 +200,10 @@ eyeColor.addEventListener('click', function (evt) {
 });
 
 var changeFireballColor = function (evt) {
-    var color = fireballColors[getRandomNumber(0, fireballColors.length)];
+    var color = fireballColors[getRandomNumber(0, fireballColors.length)];      /* для передачи корректного значения в форму */
+    /* видимо setup-fireball-wrap сам ставить цвет в rgb */
     evt.currentTarget.style.backgroundColor = color;
     inputFireball.value = color;
-    console.log(inputFireball.value);
-    console.log(evt.currentTarget.style.backgroundColor);
-    console.log(color);
-    console.log(evt);
 };
 
 fireballColor.addEventListener('click', function (evt) {
