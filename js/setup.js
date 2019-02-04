@@ -1,6 +1,6 @@
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
-var setupOpenIcon = document.querySelector('.setup-open-icon');
+// var setupOpenIcon = document.querySelector('.setup-open-icon');
 var setupClose = document.querySelector('.setup-close');
 var setupUserName = document.querySelector('.setup-user-name');
 var form = document.querySelector('.setup-wizard-form');
@@ -196,9 +196,13 @@ eyeColor.addEventListener('click', function (evt) {
 });
 
 var changeFireballColor = function (evt) {
-    evt.target.style = 'background-color: ' + fireballColors[getRandomNumber(0, fireballColors.length)] +';';
-    inputFireball = evt.target.style.backgroundColor;
-    
+    var color = fireballColors[getRandomNumber(0, fireballColors.length)];
+    evt.currentTarget.style.backgroundColor = color;
+    inputFireball.value = color;
+    console.log(inputFireball.value);
+    console.log(evt.currentTarget.style.backgroundColor);
+    console.log(color);
+    console.log(evt);
 };
 
 fireballColor.addEventListener('click', function (evt) {
