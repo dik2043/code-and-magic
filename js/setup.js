@@ -4,6 +4,12 @@ var setupOpenIcon = document.querySelector('.setup-open-icon');
 var setupClose = document.querySelector('.setup-close');
 var setupUserName = document.querySelector('.setup-user-name');
 var form = document.querySelector('.setup-wizard-form');
+var coatColor = document.querySelector('.setup-wizard .wizard-coat');
+var eyeColor = document.querySelector('.setup-wizard .wizard-eyes');
+var fireballColor = document.querySelector('.setup-fireball-wrap');
+var inputCoat = document.querySelector('input[name=coat-color]');
+var inputEye = document.querySelector('input[name=eyes-color]');
+var inputFireball = document.querySelector('input[name=fireball-color]');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
@@ -33,6 +39,14 @@ var lastNames = [
     'Топольницкая',
     'Нионго',
     'Ирвинг'
+];
+
+var fireballColors = [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
 ];
 
 var coatColors = [
@@ -159,6 +173,37 @@ setupClose.addEventListener('keydown', function (evt) {
     }
 });
 
+
+// Изменение цветов волшебника
+/*  */
+
+var changeCoatColor = function (evt) {
+    evt.target.style.fill = coatColors[getRandomNumber(0, coatColors.length)];
+    inputCoat = evt.target.style.fill;
+};
+
+coatColor.addEventListener('click', function (evt) {
+    changeCoatColor(evt);
+});
+
+var changeEyeColor = function (evt) {
+    evt.target.style.fill = eyesColors[getRandomNumber(0, eyesColors.length)];
+    inputEye = evt.target.style.fill;
+};
+
+eyeColor.addEventListener('click', function (evt) {
+    changeEyeColor(evt);
+});
+
+var changeFireballColor = function (evt) {
+    evt.target.style = 'background-color: ' + fireballColors[getRandomNumber(0, fireballColors.length)] +';';
+    inputFireball = evt.target.style.backgroundColor;
+    
+};
+
+fireballColor.addEventListener('click', function (evt) {
+    changeFireballColor(evt);
+});
 
 
 /* почему при клике на .setup-open-icon срабатывает код как на клике на .setup-open? */
