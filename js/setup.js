@@ -1,4 +1,10 @@
 var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupOpenIcon = document.querySelector('.setup-open-icon');
+var setupClose = document.querySelector('.setup-close');
+var setupUserName = document.querySelector('.setup-user-name');
+var form = document.querySelector('.setup-wizard-form');
+
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');   /* долбанутая штука */
@@ -68,7 +74,6 @@ var createObj = function () {
 
 /* Показываем скрытые элементы */
 
-setup.classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
 
 /* Создаем массив из четырех случайных объектов (волшебников) */
@@ -76,7 +81,6 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 for (var i = 0; i < 4; i++) {
     wizards[i] = createObj();
 }
-
 
 /* Создаем волшебника из верстки */
 
@@ -97,8 +101,64 @@ for (i = 0; i < wizards.length; i++) {
 }
 
 /* Создаем DOM-элементы по шаблону */
+
 var createDOMWizard = function (fragment) {
     similarWizardsList.appendChild(fragment);
 };
 
 createDOMWizard(documentFragment);
+
+
+// ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4
+/* Сначала опишем функции*/
+
+var onPopupEscPress = function (evt) {
+    if (evt.keyCode === 27 && evt.target === setupUserName) {       /* если фокус на поле, то не закрываем */
+        setupUserName.blur();
+    } else if (evt.keyCode === 27) {       /* esc */
+        closePopup();
+    } 
+};
+
+var onPopupEnterPress = function (evt) {
+    if (evt.keyCode === 13) {
+        form.submit();
+    } 
+};
+
+var openPopup = function () {
+    setup.classList.remove('hidden');
+    document.addEventListener('keydown', onPopupEnterPress, true);
+    document.addEventListener('keydown', onPopupEscPress, true);
+};
+
+var closePopup = function () {
+    setup.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscPress, true);
+};
+
+/* Навешиваем обработчики на элементы */
+
+setupOpen.addEventListener('click', function () {
+    openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 13) {       /* enter */
+        openPopup();
+    } 
+});
+
+setupClose.addEventListener('click', function () {
+    closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 13) {       /* enter */
+        closePopup();
+    }
+});
+
+
+
+/* почему при клике на .setup-open-icon срабатывает код как на клике на .setup-open? */
