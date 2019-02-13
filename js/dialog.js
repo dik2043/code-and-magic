@@ -1,6 +1,6 @@
 'use strict';
 
-var dialogHandle = document.querySelector('.upload');
+var dialogHandle = setup.querySelector('.upload');
 
 dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -48,3 +48,9 @@ dialogHandle.addEventListener('mousedown', function (evt) {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 });
+
+
+
+// Заметки
+/* Почему не работает перетаскивание по клику на setup-user-pic? */
+/* Почему перетаскивается весь блок setup, ведь выбираем только картинку */
