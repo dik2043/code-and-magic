@@ -1,3 +1,5 @@
+'use strict';
+
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 // var setupOpenIcon = document.querySelector('.setup-open-icon');
@@ -150,6 +152,8 @@ var openPopup = function () {
 };
 
 var closePopup = function () {
+    setup.style.top = '80px';
+    setup.style.left = '50%';
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress, true);
     setupOpen.removeEventListener('click', closePopup);
@@ -201,7 +205,7 @@ eyeColor.addEventListener('click', function (evt) {
 
 var changeFireballColor = function (evt) {
     var color = fireballColors[getRandomNumber(0, fireballColors.length)];      /* для передачи корректного значения в форму */
-    /* видимо setup-fireball-wrap сам ставить цвет в rgb */
+    /* видимо setup-fireball-wrap сам ставит цвет в rgb */
     evt.currentTarget.style.backgroundColor = color;
     inputFireball.value = color;
 };
@@ -211,4 +215,6 @@ fireballColor.addEventListener('click', function (evt) {
 });
 
 
+
+// Заметки
 /* почему при клике на .setup-open-icon срабатывает код как на клике на .setup-open? */
