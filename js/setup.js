@@ -24,30 +24,30 @@
 
     var similarWizardsList = document.querySelector('.setup-similar-list');
 
-    var wizards = [];
-    /* Пустой массив для заполнения счетчиком */
-
-    var names = [
-        'Иван',
-        'Хуан Себастьян',
-        'Мария',
-        'Кристофор',
-        'Виктор',
-        'Юлия',
-        'Люпита',
-        'Вашингтон'
-    ];
-
-    var lastNames = [
-        'да Марья',
-        'Верон',
-        'Мирабелла',
-        'Вальц',
-        'Онопко',
-        'Топольницкая',
-        'Нионго',
-        'Ирвинг'
-    ];
+    // var wizards = [];
+    // /* Пустой массив для заполнения счетчиком */
+    //
+    // var names = [
+    //     'Иван',
+    //     'Хуан Себастьян',
+    //     'Мария',
+    //     'Кристофор',
+    //     'Виктор',
+    //     'Юлия',
+    //     'Люпита',
+    //     'Вашингтон'
+    // ];
+    //
+    // var lastNames = [
+    //     'да Марья',
+    //     'Верон',
+    //     'Мирабелла',
+    //     'Вальц',
+    //     'Онопко',
+    //     'Топольницкая',
+    //     'Нионго',
+    //     'Ирвинг'
+    // ];
 
     var fireballColors = [
         '#ee4830',
@@ -100,38 +100,58 @@
 
     /* Создаем массив из четырех случайных объектов (волшебников) */
 
-    for (var i = 0; i < 4; i++) {
-        wizards[i] = createObj();
-    }
+    // for (var i = 0; i < 4; i++) {
+    //     wizards[i] = createObj();
+    // }
 
     /* Создаем волшебника из верстки */
 
     var renderWizard = function (wizard) {
         var wizardElement = similarWizardTemplate.cloneNode(true);
         wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-        wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-        wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColors;
+        wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+        wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
         return wizardElement;
     };
 
-    /* Создаем пустое "ведро" (document fragment) и прикрепляем к нему четырех генерируемых волшебников */
+    /* Создаем пустое "ведро" (document fragment) и прикрепляем к нему четырех СКАЧАННЫХ волшебников */
 
-    var documentFragment = document.createDocumentFragment();
-    for (i = 0; i < wizards.length; i++) {
-        documentFragment.appendChild(renderWizard(wizards[i]));
-    }
+    window.load(function (wizards) {
+        var documentFragment = document.createDocumentFragment();
+
+        for (var i = 0; i < 4; i++) {
+            documentFragment.appendChild(renderWizard(wizards[i]));
+        }
+        similarWizardsList.appendChild(documentFragment);
+    });
+    
+    
+    // var documentFragment = document.createDocumentFragment();
+    // for (i = 0; i < wizards.length; i++) {
+    //     documentFragment.appendChild(renderWizard(wizards[i]));
+    // }
 
     /* Создаем DOM-элементы по шаблону */
 
-    var createDOMWizard = function (fragment) {
-        similarWizardsList.appendChild(fragment);
-    };
+    // var createDOMWizard = function (fragment) {
+    //     similarWizardsList.appendChild(fragment);
+    // };
+    //
+    // createDOMWizard(documentFragment);
 
-    createDOMWizard(documentFragment);
+
+    form.addEventListener('submit', function (evt) {
+        window.upload(new FormData(form), function (response) {
+            window.setupBlock.classList.add('hidden');
+        });
+        evt.preventDefault();
+    });
+
 
 
 // ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4
+    
     /* Сначала опишем функции*/
 
     var onPopupEscPress = function (evt) {
@@ -188,7 +208,6 @@
 
 
 // Изменение цветов волшебника
-    /*  */
 
     var changeCoatColor = function (evt) {
         evt.target.style.fill = coatColors[getRandomNumber(0, coatColors.length)];
@@ -223,3 +242,4 @@
 
 // Заметки
 /* почему при клике на .setup-open-icon срабатывает код как на клике на .setup-open? */
+/* пиздец непонятно че с сервером делаю */
