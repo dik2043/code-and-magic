@@ -104,7 +104,7 @@
     //     wizards[i] = createObj();
     // }
 
-    /* Создаем волшебника из верстки */
+    /* Создать волшебника для списка похожих */
 
     var renderWizard = function (wizard) {
         var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -115,38 +115,43 @@
         return wizardElement;
     };
 
-    /* Создаем пустое "ведро" (document fragment) и прикрепляем к нему четырех СКАЧАННЫХ волшебников */
+    var errorFragment = document.createDocumentFragment();
+    var errorMessage = document.createElement('div');
+    errorMessage.style.position = 'absolute';
+    errorMessage.style.backgroundColor = 'white';
+    errorMessage.style.width = '200px';
+    errorMessage.style.height = '200px';
+    errorMessage.style.top = '50%';
+    errorMessage.style.left = '50%';
+    errorMessage.style.color = 'black';
+    errorMessage.style.zIndex = '200';
+    errorFragment.appendChild(errorMessage);
 
-    window.load(function (wizards) {
+    /* Создаем пустое "ведро" (document fragment) и прикрепляем к нему СКАЧАННЫХ волшебников */
+
+    window.backend.load(function (wizards) {
         var documentFragment = document.createDocumentFragment();
 
-        for (var i = 0; i < 4; i++) {
+        var randomCounter = getRandomNumber(0, wizards.length);
+
+        for (var i = randomCounter; i < randomCounter + 4; i++) {
             documentFragment.appendChild(renderWizard(wizards[i]));
         }
         similarWizardsList.appendChild(documentFragment);
+    }, function (message) {
+        document.querySelector('body').insertBefore(errorFragment, document.querySelector('.overlay'));
+        errorMessage.textContent = message;
     });
     
     
-    // var documentFragment = document.createDocumentFragment();
-    // for (i = 0; i < wizards.length; i++) {
-    //     documentFragment.appendChild(renderWizard(wizards[i]));
-    // }
-
-    /* Создаем DOM-элементы по шаблону */
-
-    // var createDOMWizard = function (fragment) {
-    //     similarWizardsList.appendChild(fragment);
-    // };
-    //
-    // createDOMWizard(documentFragment);
-
 
     form.addEventListener('submit', function (evt) {
-        window.upload(new FormData(form), function (response) {
+        window.backend.save(new FormData(form) /*это data из save*/, function (response) {
             window.setupBlock.classList.add('hidden');
         });
         evt.preventDefault();
-    });
+    } /* а это onLoad из save */);
+    
 
 
 
@@ -243,3 +248,4 @@
 // Заметки
 /* почему при клике на .setup-open-icon срабатывает код как на клике на .setup-open? */
 /* пиздец непонятно че с сервером делаю */
+/* ? почему иногда не получается прочитать name у wizard[i] в функции load ? */

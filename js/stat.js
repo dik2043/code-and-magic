@@ -1,6 +1,6 @@
 'use strict';
 
-// Функция для изоляции переменных в своей области видимости
+// Файл отвечает за отрисовку статистики при  попадании фаерболом в забор
 
 (function () {
 
@@ -48,7 +48,7 @@
 
     /* Отрисовать статистику при попадании в забор */
 
-    var renderStatistics = function (ctx, players, times) {   /* массив players приходит из game.js*/
+        window.renderStatistics = function (ctx, players, times) {   /* массив players приходит из game.js*/
         renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgb(0, 0, 0, 0.7');
         renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
@@ -60,8 +60,7 @@
         ctx.fillText('Ура, вы победили!', CLOUD_X + FONT_GAP * 1, CLOUD_Y + FONT_GAP * 1);
         ctx.fillText('Список результатов:', CLOUD_X + FONT_GAP * 1, CLOUD_Y + FONT_GAP * 3);
 
-        ctx.fillStyle = '#000';
-        /* черный */
+        ctx.fillStyle = '#000';     /* черный */
 
         // var playerIndex = 0;
         // var playerName = 'Вы';
