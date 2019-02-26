@@ -6,7 +6,7 @@
 
     window.setupBlock = document.querySelector('.setup');
     var setupOpen = document.querySelector('.setup-open');
-    var setupOpenIcon = document.querySelector('.setup-open-icon');
+    // var setupOpenIcon = document.querySelector('.setup-open-icon');
     var setupClose = document.querySelector('.setup-close');
     var setupUserName = document.querySelector('.setup-user-name');
     var form = document.querySelector('.setup-wizard-form');
@@ -19,36 +19,10 @@
 
     var similarWizardTemplate = document.querySelector('#similar-wizard-template')
         .content
-        .querySelector('.setup-similar-item');
-    /* долбанутая штука */
+        .querySelector('.setup-similar-item');    /* долбанутая штука */
 
     var similarWizardsList = document.querySelector('.setup-similar-list');
-
-    // var wizards = [];
-    // /* Пустой массив для заполнения счетчиком */
-    //
-    // var names = [
-    //     'Иван',
-    //     'Хуан Себастьян',
-    //     'Мария',
-    //     'Кристофор',
-    //     'Виктор',
-    //     'Юлия',
-    //     'Люпита',
-    //     'Вашингтон'
-    // ];
-    //
-    // var lastNames = [
-    //     'да Марья',
-    //     'Верон',
-    //     'Мирабелла',
-    //     'Вальц',
-    //     'Онопко',
-    //     'Топольницкая',
-    //     'Нионго',
-    //     'Ирвинг'
-    // ];
-
+    
     var fireballColors = [
         '#ee4830',
         '#30a8ee',
@@ -82,14 +56,13 @@
 
     /* Создать случайный объект (волшебника) */
 
-    var createObj = function () {
-        var obj = {
-            'name': names[getRandomNumber(0, names.length - 1)] + ' ' + lastNames[getRandomNumber(0, lastNames.length - 1)],
-            'coatColor': coatColors[getRandomNumber(0, coatColors.length - 1)],
-            'eyesColors': eyesColors[getRandomNumber(0, eyesColors.length - 1)]
-        };
-        return obj;
-    };
+    // var createObj = function () {
+    //     return {
+    //         'name': names[getRandomNumber(0, names.length - 1)] + ' ' + lastNames[getRandomNumber(0, lastNames.length - 1)],
+    //         'coatColor': coatColors[getRandomNumber(0, coatColors.length - 1)],
+    //         'eyesColors': eyesColors[getRandomNumber(0, eyesColors.length - 1)]
+    //     };
+    // };
 
 
 // Начинаем действия
@@ -97,12 +70,6 @@
     /* Показываем скрытые элементы */
 
     document.querySelector('.setup-similar').classList.remove('hidden');
-
-    /* Создаем массив из четырех случайных объектов (волшебников) */
-
-    // for (var i = 0; i < 4; i++) {
-    //     wizards[i] = createObj();
-    // }
 
     /* Создать волшебника для списка похожих */
 
@@ -152,9 +119,8 @@
         evt.preventDefault();
     } /* а это onLoad из save */);
     
-
-
-
+    
+    
 // ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4     ДЗ 4
     
     /* Сначала опишем функции*/
@@ -245,7 +211,9 @@
     });
 })();
 
+
 // Заметки
 /* почему при клике на .setup-open-icon срабатывает код как на клике на .setup-open? */
 /* пиздец непонятно че с сервером делаю */
 /* ? почему иногда не получается прочитать name у wizard[i] в функции load ? */
+/* херли редактор выдает ошибку необъявленной переменной? Как решить? wizard.colorEyes (80) ь*/
